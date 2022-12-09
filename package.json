@@ -1,0 +1,27 @@
+{
+  "name": "exegol-mongo-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "type": "module",
+  "imports": {
+    "#src/*": "./*.js",
+    "#config/*": "./config/*.json"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "init": "node sampledata.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@fastify/cors": "^8.2.0",
+    "axios": "^1.2.1",
+    "dotenv": "^16.0.3",
+    "fastify": "^4.10.2",
+    "fastify-plugin": "^4.4.0",
+    "lodash": "^4.17.21",
+    "mongodb": "^4.12.1"
+  }
+}
