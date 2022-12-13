@@ -1,8 +1,8 @@
 import fp from 'fastify-plugin'
-import { MongoClient } from "mongodb";
+import { MongoClient, ObjectId } from "mongodb";
 import env from '#src/plugins/env'
 
-const uri = `mongodb://${env.DATABASE_USER}:${env.DATABASE_PASS}@${env.DATABASE_HOST}:${env.DATABASE_PORT}`;
+const uri = env.URI_MONGODB
 
 const client = new MongoClient(uri, {
     serverSelectionTimeoutMS: 3500
@@ -17,6 +17,7 @@ const connect = async () => {
     } catch(error) {
 
         console.log('No database connected')
+        console.log(error)
 
     }
 
@@ -30,7 +31,10 @@ const plugin = (server, opts, done) => {
 
     server.addHook('onRequest', async (request, reply) => {
 
-        return request.db = client.db(env.DATABASE_NAME)
+        request.db = client.db(env.DATABASE_NAME)
+        request.objectId = ObjectId
+
+        return 
 
     })
 

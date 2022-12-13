@@ -5,6 +5,7 @@ import cors from '@fastify/cors'
 import fastify from 'fastify'
 
 const server = fastify({
+    //http2: true,
     //logger: true
 })
 
@@ -24,6 +25,8 @@ server.get('/', async (request, reply) => {
 })
 
 server.listen({ port: process.env.SERVER_PORT }, (err) => {
+
+    console.log('Server on...')
 
     if (err) {
         server.log.error(err)
