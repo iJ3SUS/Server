@@ -1,4 +1,3 @@
-
 const browse = async (request, reply) => {
 
     const { db } = request
@@ -46,14 +45,15 @@ const update = async(request, reply) => {
     const model = await request.db.collection('clients').updateOne(
         { _id: new objectId(id) },
         {
-          $set: request.body,
-          $currentDate: { lastModified: true }
+            $set: request.body,
+            $currentDate: { lastModified: true }
         }
     )
 
     return reply.send(model)
 
 }
+
 export default {
     update,
     browse,

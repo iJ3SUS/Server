@@ -4,6 +4,8 @@ const routes = (server, opts, done) => {
 
     server.get('/options', optionsController.index)
 
+    server.post('/options', optionsController.create)
+
     done()
 }
 

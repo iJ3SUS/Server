@@ -1,26 +1,41 @@
-import { pluginDB } from '#src/plugins/database'
+//NATIVE
+import fs from 'fs'
+
+//ROUTES
 import optionsRoutes from '#src/routes/options'
 import clientsRoutes from '#src/routes/clients'
+import authRoutes from '#src/routes/auth'
+
+//PLUGINS
+import { pluginDB } from '#src/plugins/database'
+import logs from '#src/plugins/logs'
 import cors from '@fastify/cors'
+
+//CORE
 import fastify from 'fastify'
 
+if ( !fs.existsSync('logs') ){
+    fs.mkdirSync('logs')
+}
+
 const server = fastify({
-    //http2: true,
-    //logger: true
+    logger: {
+        level: 'error',
+        file: 'logs/log.txt'
+    }
 })
 
 server.register( cors )
-
+server.register( logs )
 server.register( pluginDB )
 
 server.register( optionsRoutes )
 server.register( clientsRoutes )
+server.register( authRoutes )
 
 server.get('/', async (request, reply) => {
 
-    reply.send({
-        name: 'Hello Word'
-    })
+    reply.send('Exegol...')
 
 })
 

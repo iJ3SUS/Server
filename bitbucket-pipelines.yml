@@ -43,8 +43,8 @@ definitions:
         - aws configure set source_profile $PROFILE_NAME --profile $PROFILE_NAME
 
         # Download SSL Certs
-        - aws s3 cp s3://$S3_NAME_SSL/probemos.dev/star.probemos.dev.crt docker/certs/probemos.dev/ --profile $PROFILE_NAME
-        - aws s3 cp s3://$S3_NAME_SSL/probemos.dev/star.probemos.dev.key docker/certs/probemos.dev/ --profile $PROFILE_NAME
+        - aws s3 cp s3://$S3_NAME_SSL/probemos.dev/star.probemos.dev.crt docker/test/certs/probemos.dev/ --profile $PROFILE_NAME
+        - aws s3 cp s3://$S3_NAME_SSL/probemos.dev/star.probemos.dev.key docker/test/certs/probemos.dev/ --profile $PROFILE_NAME
 
       artifacts:
         - .env-var
@@ -82,16 +82,18 @@ definitions:
       name: start-docker-test
       script:
         - source .env-var
-        - scp .env-var ubuntu@${SERVER_DEST}:${REMOTE_PATH_DOCKER}/test/.env
-        - scp -r ./docker/test/* ubuntu@${SERVER_DEST}:${REMOTE_PATH_DOCKER}/test/
+        
+        - scp .env-var ubuntu@${SERVER_DEST}:${REMOTE_PATH_DOCKER}test/.env
+        - scp -r ./docker/test/* ubuntu@${SERVER_DEST}:${REMOTE_PATH_DOCKER}test/
+
         #Reinicio de instancia de docker
-        - ssh ubuntu@${SERVER_DEST} docker-compose -f ${REMOTE_PATH_DOCKER}/test/docker-compose.yml down
-        - ssh ubuntu@${SERVER_DEST} docker-compose -f ${REMOTE_PATH_DOCKER}/test/docker-compose.yml up -d --build
+        - ssh ubuntu@${SERVER_DEST} docker-compose -f ${REMOTE_PATH_DOCKER}test/docker-compose.yml down
+        - ssh ubuntu@${SERVER_DEST} docker-compose -f ${REMOTE_PATH_DOCKER}test/docker-compose.yml up -d --build
       artifacts:
         - .env-var
 
     step: &npm-install-test
-      name: Test NPM Install
+      name: npm-install-test
       script:
         - source .env-var
         - pipe: atlassian/ssh-run:0.3.0
@@ -99,18 +101,6 @@ definitions:
             SSH_USER: "ubuntu"
             SERVER: $SERVER_DEST
             COMMAND: "docker exec -ti ${CONTAINER_NAME} npm install"
-      artifacts:
-        - .env-var 
-
-    step: &npm-run-build-test
-      name: npm-run-build-test
-      script:
-        - source .env-var
-        - pipe: atlassian/ssh-run:0.3.0
-          variables:
-            SSH_USER: "ubuntu"
-            SERVER: $SERVER_DEST
-            COMMAND: "docker exec -ti ${CONTAINER_NAME} npm run build"
       artifacts:
         - .env-var 
 
@@ -134,7 +124,7 @@ definitions:
           variables:
             SSH_USER: "ubuntu"
             SERVER: $SERVER_DEST
-            COMMAND: "docker exec -ti ${CONTAINER_NAME}  pm2 --name ${CONTAINER_NAME} start npm -- start"
+            COMMAND: "docker exec -ti ${CONTAINER_NAME}  pm2 --name ${CONTAINER_NAME} start server.js"
       artifacts:
         - .env-var
 #   #manual deploy-test
@@ -144,10 +134,10 @@ pipelines:
     deploy-test-full:
       - step: *make-envs-test
       - step: *download-ssl-test
+      - step: *set-perms-test
       - step: *rsync-test
       - step: *copy-env-test
-      # - step: *start-docker-test
-      # - step: *npm-install-test
-      # - step: *npm-run-build-test
+      - step: *start-docker-test
+      - step: *npm-install-test
       - step: *set-perms-test
-      # - step: *npm-start-pm2-test
+      - step: *npm-start-pm2-test

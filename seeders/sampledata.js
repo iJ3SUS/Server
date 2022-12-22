@@ -38,15 +38,16 @@ const sampleOptions = {
                 {
                     name: 'Ganadería',
                     options: [
-                        'Aguacate',	'Arroz', 'Banano', 'Caña', 'Flores', 'Frutales',
-                        'Hortalizas', 'Maíz', 'Palma', 'Papa', 'Otro'
+                        'Leche', 'Carne', 'Doble proposito', 'Otro'
                     ]
                 },
                 {
                     name: 'Agricultura',
                     options: [
-                        'Leche', 'Carne', 'Doble proposito', 'Otro'
+                        'Aguacate',	'Arroz', 'Banano', 'Caña', 'Flores', 'Frutales',
+                        'Hortalizas', 'Maíz', 'Palma', 'Papa', 'Otro'
                     ]
+                    
                 }
             ],
             implements: [

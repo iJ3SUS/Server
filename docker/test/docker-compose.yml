@@ -5,7 +5,7 @@ services:
   backend-nbp005:
     build:
       context: .
-      dockerfile: Dockerfile_qa
+      dockerfile: Dockerfile
     image: $CONTAINER_NAME-v1.0
     container_name: $CONTAINER_NAME
     restart: unless-stopped

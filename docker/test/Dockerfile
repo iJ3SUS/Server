@@ -34,7 +34,7 @@ RUN mkdir -p /home/exegol/.npm && \
 RUN rm -f /etc/nginx/sites-enabled/default
 
 # Run Services
-COPY docker/test/entrypoint.sh /home/exegol/entrypoint.sh
+COPY entrypoint.sh /home/exegol/entrypoint.sh
 CMD ["/bin/bash", "/home/exegol/entrypoint.sh"]
 RUN echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
 

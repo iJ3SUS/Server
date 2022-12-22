@@ -10,7 +10,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "nodemon server.js",
+    "import": "node imports/db-import.js"
   },
   "author": "",
   "license": "ISC",
@@ -22,7 +23,9 @@
     "fastify-plugin": "^4.4.0",
     "knex": "^2.3.0",
     "lodash": "^4.17.21",
+    "luxon": "^3.1.1",
     "mongodb": "^4.12.1",
-    "mysql": "^2.18.1"
+    "mysql": "^2.18.1",
+    "read-excel-file": "^5.5.3"
   }
 }
