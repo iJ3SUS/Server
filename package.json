@@ -1,0 +1,26 @@
+{
+  "name": "@idealabs/server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iJ3SUS/Server.git"
+  },
+  "author": "iJ3SUS",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/iJ3SUS/Server/issues"
+  },
+  "homepage": "https://github.com/iJ3SUS/Server#readme",
+  "devDependencies": {
+    "@types/node": "^18.14.0",
+    "typescript": "^4.9.5"
+  },
+  "dependencies": {
+    "fastify": "^4.13.0"
+  }
+}
