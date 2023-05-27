@@ -7,10 +7,6 @@ const plugin = (server:any, opts:any, done:any) => {
         serverSelectionTimeoutMS: 3500
     })
 
-    client.connect().catch( err => {
-        server.log.error(err)
-    })
-
     const util = {
         objectId: ObjectId
     }

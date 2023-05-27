@@ -26,8 +26,8 @@ server.register(testRoutes, {
     prefix: 'test'
 })
 
-server.get('/', async (request, reply) => {
-    return { pong: 'it worked sd sd !' }
+server.get('/', async (request:any, reply:any) => {
+    return { pong: 'pong pong' }
 })
 
 const start = async () => {
