@@ -1,0 +1,21 @@
+# Carpetas
+node_modules/
+build/
+
+# Archivos de configuración
+.env
+.env.*
+
+# Archivos de registro
+*.log
+
+# Archivos de respaldo
+*.bak
+*.swp
+
+# Archivos de compilación TypeScript
+*.js
+*.js.map
+
+# Otros archivos
+.DS_Store
