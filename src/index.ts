@@ -1,4 +1,5 @@
 import 'module-alias/register'
+import "reflect-metadata"
 
 //SERVER
 import server from '@root/plugins/server'
@@ -6,27 +7,35 @@ import server from '@root/plugins/server'
 //PLUGINS
 import validator from '@root/plugins/fastify/validator'
 import db from '@root/plugins/fastify/db'
+import ioc from '@root/plugins/fastify/ioc'
+import module from '@root/plugins/fastify/module'
 
-//ROUTES
-import testRoutes from '@root/api/test/routes'
+//MODULES
+import prueba from '@root/modules/prueba'
 
 server.register(db, {
     uri: "mongodb://J3SUS:12345678@127.0.0.1:27017",
     database: "xPrueba"
 })
 
-server.register(validator, { 
-    removeAdditional: 'all',
-    useDefaults: true,
-    coerceTypes: true,
-    allErrors: true
+server.register(ioc)
+
+server.register(module, {
+    controller: prueba
 })
 
-server.register(testRoutes, {
-    prefix: 'test'
-})
+// server.register(validator, { 
+//     removeAdditional: 'all',
+//     useDefaults: true,
+//     coerceTypes: true,
+//     allErrors: true
+// })
 
-server.get('/', async (request:any, reply:any) => {
+// server.register(testRoutes, {
+//     prefix: 'test'
+// })
+
+server.get('/', async (request : any, reply : any) => {
     return { pong: 'pong pong' }
 })
 

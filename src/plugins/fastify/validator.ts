@@ -2,9 +2,7 @@
 import fp from 'fastify-plugin'
 import ajv from 'ajv'
 
-import IServer from '@root/interfaces/server'
-
-const plugin = (server:IServer, opts:any, done:any) => {
+const plugin = (server:any, opts:any, done:any) => {
 
     const validator: any = new ajv(opts)
 
