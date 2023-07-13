@@ -22,8 +22,9 @@ const register = ( controller : any ) => {
     return result
 }
 
-const plugin = (server : any, opts : any, done : any) => {
+const plugin = (server : Server, opts : any, done : any) => {
 
+    
     const dependencies = register( opts.controller )
 
     dependencies.forEach((dependency : any) => {
@@ -38,17 +39,21 @@ const plugin = (server : any, opts : any, done : any) => {
 
             server.route({
                 method: route.method,
-                url: '/' + route.url,
+                url: '/' + opts.prefix +'/' + route.url,
+                preHandler: route.preHandler,
                 handler: controller[route.handler].bind(controller)
             })
             
         })
     }
 
+    server.decorateRequest('all', null)
+
+
     done()
 }
 
-const pluginDB = fp( plugin )
+const pluginDB = fp(plugin)
 
 export default pluginDB
 

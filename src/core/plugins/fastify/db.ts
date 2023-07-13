@@ -14,7 +14,7 @@ const plugin = (server:any, opts:any, done:any) => {
     const db = client.db(opts.database)
 
     server.decorate('db', db)
-
+    
     server.decorate('util', util)
 
     done()

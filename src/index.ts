@@ -1,42 +1,52 @@
 import 'module-alias/register'
 import "reflect-metadata"
 
+import "@root/core/types/global"
+
 //SERVER
-import server from '@root/plugins/server'
+import server from '@root/core/plugins/server'
 
 //PLUGINS
-import validator from '@root/plugins/fastify/validator'
-import db from '@root/plugins/fastify/db'
-import ioc from '@root/plugins/fastify/ioc'
-import module from '@root/plugins/fastify/module'
+import db from '@root/core/plugins/fastify/db'
+import ioc from '@root/core/plugins/fastify/ioc'
+import module from '@root/core/plugins/fastify/module'
+import validator from '@root/core/plugins/fastify/validator'
 
 //MODULES
-import prueba from '@root/modules/prueba'
+import test from '@root/modules/test/test'
 
-server.register(db, {
-    uri: "mongodb://J3SUS:12345678@127.0.0.1:27017",
-    database: "xPrueba"
-})
+server.addHook('onRequest', (request:any, reply:any, done:any) => {
+    const startTime = performance.now();
+    request.startTime = startTime;
+    done();
+});
+  
+server.addHook('onSend', (request:any, reply:any, response:any, done:any) => {
+    const endTime = performance.now();
+    const cpuTime = endTime - request.startTime;
+    console.log(`La solicitud ${request.id} tomó ${cpuTime} milisegundos de tiempo de CPU.`);
+    done();
+});
+
+// server.decorateRequest('all', null)
+
+// server.addHook('preHandler', (request : Request, reply: Reply, done : any) => {
+//     request.all = request.method == 'GET' ? request.query : request.body
+//     done()
+// })
 
 server.register(ioc)
 
-server.register(module, {
-    controller: prueba
+server.register(db, {
+    uri: "mongodb://J3SUS:JANovember10@127.0.0.1:27017",
+    database: "xPrueba"
 })
 
-// server.register(validator, { 
-//     removeAdditional: 'all',
-//     useDefaults: true,
-//     coerceTypes: true,
-//     allErrors: true
-// })
+server.register(validator)
 
-// server.register(testRoutes, {
-//     prefix: 'test'
-// })
-
-server.get('/', async (request : any, reply : any) => {
-    return { pong: 'pong pong' }
+server.register(module, {
+    controller: test,
+    prefix: 'test'
 })
 
 const start = async () => {
