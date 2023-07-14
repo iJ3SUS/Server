@@ -47,10 +47,8 @@ const plugin = (server : Server, opts : any, done : any) => {
         })
     }
 
-    server.decorateRequest('all', null)
-
-
     done()
+    
 }
 
 const pluginDB = fp(plugin)

@@ -63,7 +63,6 @@ class Validator {
             
             if(this.removeProperty(rules, xPath)){
 
-                console.log('remove', xPath, payload[key])
                 delete payload[key] 
                 continue
                 
@@ -88,7 +87,6 @@ class Validator {
                 
                     const response = await handler(this.payload, payload[key], this.params, rules[rule], newType, xPath)
 
-                    //console.log(response, xPath)
                     payload[key] = response
     
                 } catch (error : any) {
