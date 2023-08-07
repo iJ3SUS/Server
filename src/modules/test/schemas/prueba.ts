@@ -12,9 +12,9 @@ const schema : Schema = {
     },
 
     messages: {
-        // "username": {
-        //     required: "Esta propiedad es requerida"
-        // }
+        "username.name": {
+            type: "Esta aleatorio"
+        }
     }
 
 }
