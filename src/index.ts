@@ -4,6 +4,8 @@ import path from 'path'
 
 import "@root/core/types/global"
 
+import cors from '@fastify/cors'
+
 import modules from '@root/core/utils/misc/recursive-modules'
 
 import server from '@root/core/plugins/server'
@@ -14,13 +16,17 @@ import module from '@root/core/plugins/fastify/module'
 import validator from '@root/core/plugins/fastify/validator'
 import performance from '@root/core/plugins/fastify/performance'
 
+server.register(cors, { 
+    // put your options here
+})
+
 server.register(performance)
 
 server.register(ioc)
 
 server.register(db, {
     uri: "mongodb://J3SUS:JANovember10@127.0.0.1:27017",
-    database: "xPrueba"
+    database: "xPrueba2"
 })
 
 server.register(validator)
