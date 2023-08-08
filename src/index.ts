@@ -26,7 +26,7 @@ server.register(ioc)
 
 server.register(db, {
     uri: "mongodb://J3SUS:JANovember10@127.0.0.1:27017",
-    database: "xPrueba2"
+    database: "cuentas"
 })
 
 server.register(validator)
