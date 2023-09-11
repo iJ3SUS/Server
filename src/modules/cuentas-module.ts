@@ -161,7 +161,7 @@ export default class Prueba{
 
         worksheet.addRow(['GASTOS'])
 
-        worksheet.addRow(['PLANILLA', 'NIT', 'TERCERO', 'FECHA', 'CONCEPTO', 'DETALLE', 'VALOR', 'LINK'])
+        worksheet.addRow(['PLANILLA', 'NIT', 'TERCERO', 'FECHA', 'CONCEPTO', 'DETALLE', 'TIPO FACTURA', 'FACTURA', 'VALOR', 'LINK'])
 
         for (let item of data) {
 
@@ -191,6 +191,8 @@ export default class Prueba{
                     gasto.fecha_factura,
                     gasto.concepto,
                     gasto.detalle,
+                    gasto.tipo_factura,
+                    gasto.factura,
                     gasto.valor,
                     "https://cuentas.idealabs.com.co/edit/"+element._id,
                 ])
