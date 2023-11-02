@@ -2,8 +2,6 @@
 node_modules/
 build/
 src/logs/
-dist/
-
 # Archivos de configuración
 .env
 .env.*
@@ -16,7 +14,6 @@ dist/
 *.swp
 
 # Archivos de compilación TypeScript
-*.js
 *.js.map
 
 # Otros archivos
