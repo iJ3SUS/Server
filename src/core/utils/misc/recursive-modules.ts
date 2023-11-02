@@ -15,11 +15,13 @@ export default async function modules(route : string){
 
         if(!stats.isDirectory()){
 
-            const regex = /^.+?-module\..+$/
+            const regex = /^.+?.module\..+$/
 
             if(regex.test( filename )){
 
                 const module = await import(file)
+
+                module.prefix = module.prefix  ? module.prefix : '/'
 
                 files.push( module )
 

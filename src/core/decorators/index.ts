@@ -1,5 +1,5 @@
-import { injectable } from '@root/core/decorators/ioc'
-import { route } from '@root/core/decorators/http'
+import { injectable } from './ioc'
+import { route } from './http'
 
 export {
     route,

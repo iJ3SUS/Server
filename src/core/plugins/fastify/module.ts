@@ -23,7 +23,6 @@ const register = ( controller : any ) => {
 }
 
 const plugin = (server : Server, opts : any, done : any) => {
-
     
     const dependencies = register( opts.controller )
 
@@ -37,9 +36,25 @@ const plugin = (server : Server, opts : any, done : any) => {
 
         controller._routes.forEach((route : any) => {
 
+            // route.url =  route.url.startsWith("/") ? route.url : '/' + route.url
+            
+            let prefix = opts.prefix + route.url
+
+            // prefix = prefix.endsWith("/") ? prefix.slice(0, -1) : prefix
+
+            // prefix =  prefix.startsWith("//") ? prefix.slice(1) : prefix
+
+            const regex = /^\/+|\/+$/g;
+
+
+            prefix = prefix.replace(regex, '')
+            prefix = `/${prefix}`
+
+            console.log("RUTA REGISTRADA: " + prefix)
+
             server.route({
                 method: route.method,
-                url: '/' + opts.prefix +'/' + route.url,
+                url: prefix,
                 preHandler: route.preHandler,
                 handler: controller[route.handler].bind(controller)
             })

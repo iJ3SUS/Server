@@ -2,6 +2,7 @@
 node_modules/
 build/
 src/logs/
+dist/
 
 # Archivos de configuración
 .env

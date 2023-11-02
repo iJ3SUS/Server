@@ -1,9 +1,8 @@
-import Rules from '@root/core/utils/validator/rules'
+import Rules from '../../utils/validator/rules'
 
-import Validator from "@root/core/utils/validator/validator"
+import Validator from "../../utils/validator/validator"
 
 import fp from 'fastify-plugin'
-import { FastifyRequest, FastifyReply, FastifyInstance } from 'fastify'
 
 const plugin = (server: Server, opts:any, done:any) => {
     

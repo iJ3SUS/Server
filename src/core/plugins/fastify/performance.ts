@@ -8,12 +8,12 @@ const plugin = (server : Server, opts : any, done : any) => {
         done()
     })
       
-    server.addHook('onSend', (request:any, reply:any, response:any, done:any) => {
-        const endTime = performance.now()
-        const cpuTime = endTime - request.startTime
-        console.log(`La solicitud ${request.id} tomó ${cpuTime} milisegundos de tiempo de CPU.`)
-        done()
-    })
+    // server.addHook('onSend', (request:any, reply:any, response:any, done:any) => {
+    //     const endTime = performance.now()
+    //     const cpuTime = endTime - request.startTime
+    //     console.log(`La solicitud ${request.id} tomó ${cpuTime} milisegundos de tiempo de CPU.`)
+    //     done()
+    // })
 
     done()
 }

@@ -1,7 +1,4 @@
-import Validator from "@root/core/utils/validator/validator"
-
-
-const validatorMiddleware = (schema : Schema) => async (request : Request, reply: Reply) => {
+const validatorMiddleware = (schema : Schema) => async (request : IRequest, reply: IReply) => {
 
 
     const data = request.method == 'GET' ? request.query : request.body

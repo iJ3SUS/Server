@@ -1,4 +1,3 @@
-
 import Fastify from 'fastify'
 
 const server : any = Fastify({ 

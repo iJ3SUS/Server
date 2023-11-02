@@ -8,12 +8,12 @@ declare global {
         validate?: any
     }
 
-    interface Request extends FastifyRequest {
+    interface IRequest extends FastifyRequest {
         server: Server,
         all?: any
     }
 
-    interface Reply extends FastifyReply {
+    interface IReply extends FastifyReply {
 
     }
 
